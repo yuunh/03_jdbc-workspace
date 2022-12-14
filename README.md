@@ -1,1 +1,1 @@
-# 03_jdbc-workspacd
+# 03_jdbc-workspace
