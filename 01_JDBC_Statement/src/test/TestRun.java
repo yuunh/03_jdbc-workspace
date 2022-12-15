@@ -113,34 +113,34 @@ public class TestRun {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rset = null; // select문 실행하여 조회된 결과 값들이 처음에 실질적으로 담길 객체
-		
+
 		// 실행할 sql문
 		String sql = "SELECT * FROM TEST";
-		
+
 		try {
 			// 1) jdbc driver 등록
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			
+
 			// 2) Connection 객체 생성
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "JDBC", "JDBC");
-			
+
 			// 3) Statement 객체 생성
 			stmt = conn.createStatement();
-			
+
 			// 4,5) sql문 전달해서 실행 후 결과받기 (ResultSet 객체)
 			rset = stmt.executeQuery(sql);
-			
+
 			// rset.next() => 커서를 움직이는 메소드 boolean : 다음꺼 있으면 true 없으면 false
-			
+
 			// 6)
 			while (rset.next()) {
 				int tno = rset.getInt("TNO");
 				String tname = rset.getString("TNAME");
 				Date tdate = rset.getDate("TDATE");
-				
+
 				System.out.println(tno + ", " + tname + ", " + tdate);
 			}
-			
+
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

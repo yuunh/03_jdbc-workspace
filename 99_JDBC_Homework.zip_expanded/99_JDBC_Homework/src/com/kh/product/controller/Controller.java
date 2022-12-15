@@ -58,7 +58,7 @@ public class Controller {
 	public int dml(String name, int price) {
 		int i = 0;
 		if( price >= 0) {
-			sql = "INSERT INTO PRODUCT VALUES(SEQ_PRO.NEXTVAL, '" + name + "', " + price + ", SYSDATE)"; 
+			sql = "INSERT INTO PRODUCT VALUES(SEQ_PNO.NEXTVAL, '" + name + "', " + price + ", SYSDATE)"; 
 		} else {
 			sql = "DELETE FROM PRODUCT WHERE PNAME = '" + name + "'";
 		}
