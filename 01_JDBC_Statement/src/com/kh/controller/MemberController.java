@@ -59,14 +59,67 @@ public class MemberController {
 		}
 	}
 	
-	public void selectNameList(String userName) {
+	public void selectByUserId(String userId) {
 		
-		ArrayList<Member> list = new MemberDao().selectNameList();
+		Member m = new MemberDao().selectByUserId(userId);
 		
-		if (list.equals(userName)) {
-			new MemberMenu().displayNameList(list);
+		if (m == null) { // 검색 결과가 없을 경우 (조회된 데이터 없음)
+			new MemberMenu().displayNoData(userId + "에 해당하는 검색 결과가 없습니다.");
 		} else {
-			new MemberMenu().displayNoName("이름 조회 결과가 없습니다.")
+			new MemberMenu().displayMember(m);
+		}
+	}
+	
+	/**
+	 * 사용자의 이름으로 키워드 검색 요청시 처리해주는 메소드
+	 * @param keyword
+	 */
+	public void selectByUserName(String keyword) {
+		
+		ArrayList<Member> list = new MemberDao().selectByUserName(keyword);
+		
+		if (list.isEmpty()) { // 리스트가 비어있을 경우 => 검색 결과 없음
+			new MemberMenu().displayNoData(keyword + "에 해당하는 검색 결과가 없습니다.");
+		} else { // 리스에 뭐라고 있을 경우 => 검색 결과 있음
+			new MemberMenu().displayMemberList(list);
+		}
+	}
+	
+	/**
+	 * 정보 면경 요청 처리해주는 메소드
+	 * @param userId : 변경하고자 하는 회원 아이디
+	 * @param userPwd : 변경할 비밀번호
+	 * @param email : 변경할 이메일
+	 * @param phone : 변경할 전화번호
+	 * @param address : 변경할 주소
+	 */
+	public void updateMember(String userId, String userPwd, String email, String phone, String address) {
+		
+		Member m = new Member();
+		
+		m.setUserId(userId);
+		m.setUserPwd(userPwd);
+		m.setEmail(email);
+		m.setPhone(phone);
+		m.setAddress(address);
+		
+		int result = new MemberDao().updateMember(m);
+		
+		if (result > 0) {
+			new MemberMenu().displaySuccess("성공적으로 회원 정보가 변경되었습니다.");
+		} else {
+			new MemberMenu().displayFail("회원 정보 변경에 실패했습니다.");
+		}
+	}
+	
+	public void deleteMember(String userId) {
+		
+		int result = new MemberDao().deleteMember(userId);
+		
+		if (result > 0) {
+			new MemberMenu().displaySuccess("성공적으로 회원 정보가 삭제되었습니다.");
+		} else {
+			new MemberMenu().displayFail("회원 정보 삭제에 실패했습니다.");
 		}
 		
 	}

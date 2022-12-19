@@ -41,14 +41,26 @@ public class MemberMenu {
 			sc.nextLine(); // 버퍼에 남아있는 엔터 제거
 			
 			switch (menu) { // switch start
-			case 1: inputMember(); break;
-			case 2: mc.selectList(); break; // 조회는 입력받을 거 없으니까 바로 Controller 호출
-			case 3: break;
-			case 4: break;
-			case 5: break;
-			case 6: break;
-			case 9: selectNameList(); break;
-			case 0: System.out.println("이용해주셔서 감사합니다. 프로그램이 종료됩니다."); return;
+			case 1: inputMember(); 
+					break;
+			case 2: mc.selectList();  // 조회는 입력받을 거 없으니까 바로 Controller 호출
+					break; 
+			case 3: // String userId = inputMemberId(); 
+					// mc.selectByUserId(userId); 
+					mc.selectByUserId(inputMemberId()); 
+					break;
+			case 4: // String keyword = inputMemberName(); 
+					// mc.selectByUserName(keyword); 
+					mc.selectByUserName(inputMemberName()); 
+					break;
+			case 5: updateMember();
+					break;
+			case 6: // String userId2 = inputMemberId();
+					// mc.deleteMember(userId2);
+					mc.deleteMember(inputMemberId());
+					break;
+			case 0: System.out.println("이용해주셔서 감사합니다. 프로그램이 종료됩니다."); 
+					return;
 			default: System.out.println("메뉴를 잘못입력하셨습니다. 다시 입력해주세요.");
 				
 			} // switch end
@@ -96,12 +108,57 @@ public class MemberMenu {
 		
 	}
 	
-	public void selectNameList() {
+	/**
+	 * 사용자에게 회원 아이디 입력받은 후 입력된 값을 반환시켜주는 메소드
+	 * @return : 사용자가 입력한 아이디 값
+	 */
+	public String inputMemberId() {
 		
-		System.out.print("이름 : ");
+		System.out.print("\n회원 아이디 입력 : ");
+		
+		return sc.nextLine();
+	}
+	
+	/**
+	 * 사용자에게 검색할 회원명(키워드) 입력받은 후 입력된 값을 반환시켜주는 메소드
+	 * @return : 사용자가 입력한 회원명(키워드)
+	 */
+	public String inputMemberName() {
+		
+		System.out.print("\n회원 이름(키워드) : ");
+		
+		return sc.nextLine();
+	}
+	
+	/**
+	 * 사용자에게 변경할 정보들(비번, 이메일, 전화번호, 주소)과 해당 회원 아이디 입력받는 화면
+	 */
+	public void updateMember() {
+		
+		System.out.println("\n==== 회원 정보 변경 ====");
+		
+		// 비번, 이메일, 전화번호, 주소, !아이디!
+		
+		/*
+		System.out.print("회원정보를 변경할 회원아이디 입력 : ");
 		String userId = sc.nextLine();
+		*/
+		String userId = inputMemberId(); // 위의 두 줄을 다음과 같이 줄일 수 있음!
 		
-		mc.selectNameList(userId);
+		System.out.print("변경할 암호 : ");
+		String userPwd = sc.nextLine();
+		
+		System.out.print("변경할 이메일 : ");
+		String email = sc.nextLine();
+		
+		System.out.print("변경할 전화번호 : ");
+		String phone = sc.nextLine();
+		
+		System.out.print("변경할 주소 : ");
+		String address = sc.nextLine();
+		
+		mc.updateMember(userId, userPwd, email, phone, address);
+		
 	}
 	
 	//------------------------------ 응답 화면 ------------------------------
@@ -130,6 +187,10 @@ public class MemberMenu {
 		System.out.println("\n" + message);
 	}
 	
+	/**
+	 * 조회 서비스 요청시 조회 결과가 여러 행일 경우 사용자가 보게 될 응답 화면
+	 * @param list
+	 */
 	public void displayMemberList(ArrayList<Member> list) {
 		System.out.println("\n조회된 데이터는 다음과 같습니다.");
 		
@@ -144,5 +205,14 @@ public class MemberMenu {
 		for (Member m : list) { // == m : list.get(0) => m : list.get(1) => ....
 			System.out.println(m);
 		}
+	}
+	
+	/**
+	 * 조회 서비스 요청시 조회 결과가 한 행일 경우 사용자가 보게 될 응답 화면
+	 * @param m
+	 */
+	public void displayMember(Member m) {
+		System.out.println("\n조회된 데이터는 다음과 같습니다.");
+		System.out.println(m);
 	}
 }
