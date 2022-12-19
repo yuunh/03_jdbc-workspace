@@ -86,7 +86,7 @@ public class MemberController {
 	}
 	
 	/**
-	 * 정보 면경 요청 처리해주는 메소드
+	 * 정보 변경 요청 처리해주는 메소드
 	 * @param userId : 변경하고자 하는 회원 아이디
 	 * @param userPwd : 변경할 비밀번호
 	 * @param email : 변경할 이메일
