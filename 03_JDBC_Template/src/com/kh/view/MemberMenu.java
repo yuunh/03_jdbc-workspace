@@ -41,8 +41,8 @@ public class MemberMenu {
 			sc.nextLine(); // 버퍼에 남아있는 엔터 제거
 			
 			switch (menu) { // switch start
-			case 0: login();
-					break;
+//			case 0: login();
+//					break;
 			case 1: inputMember(); 
 					break;
 			case 2: mc.selectList();  // 조회는 입력받을 거 없으니까 바로 Controller 호출
@@ -63,18 +63,18 @@ public class MemberMenu {
 		} // while end
 	} // mainMenu end
 	
-	public void login() {
-		
-		System.out.println("\n=== 로그인 ===");
-		
-		System.out.print("아이디 : ");
-		String userId = sc.nextLine();
-		
-		System.out.print("비밀번호 : ");
-		String userPwd = sc.nextLine();
-		
-		mc.loginMember(userId, userPwd);
-	}
+//	public void login() {
+//		
+//		System.out.println("\n=== 로그인 ===");
+//		
+//		System.out.print("아이디 : ");
+//		String userId = sc.nextLine();
+//		
+//		System.out.print("비밀번호 : ");
+//		String userPwd = sc.nextLine();
+//		
+//		mc.loginMember(userId, userPwd);
+//	}
 	
 	/**
 	 * 회원 추가 화면 (서브화면)
