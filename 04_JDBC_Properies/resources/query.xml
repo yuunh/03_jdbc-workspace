@@ -6,7 +6,8 @@
 	<entry key="loginMember">
 		SELECT USERNAME
 		  FROM MEMBER
-		 WHERE USERID = ? AND USERPWD = ?
+		 WHERE USERID = ? 
+		   AND USERPWD = ?
 	</entry>
 	<entry key="insertMember">
 		INSERT 
