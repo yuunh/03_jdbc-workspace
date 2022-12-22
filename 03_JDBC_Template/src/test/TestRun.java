@@ -6,12 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
-import java.util.Scanner;
 
 public class TestRun {
 
 	public static void main(String[] args) {
-		
+
 		/*
 		 *  * JDBC용 객체
 		 *  - Connection : DB의 연결정보를 담고있는 객체

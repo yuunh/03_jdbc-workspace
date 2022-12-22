@@ -63,7 +63,7 @@ public class MemberDao {
 				m = new Member(rset.getInt("userno"),
 								rset.getString("userid"),
 								rset.getString("userpwd"),
-								rset.getString("username"),
+								rset.getString("username"),                  
 								rset.getString("gender"),
 								rset.getInt("age"),
 								rset.getString("email"),
