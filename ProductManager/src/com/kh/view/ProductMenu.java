@@ -31,19 +31,19 @@ public class ProductMenu {
 			sc.nextLine();
 			
 			switch (menu) {
-			case 1: pc.selecList();
+			case 1: pc.selectList();
 				break;
 			case 2: inputProduct();
 				break;
 			case 3: updateProduct();
 				break;
-			case 4:
+			case 4: pc.deleteProduct(productId());
 				break;
-			case 5:
+			case 5: pc.selectByName(productName());
 				break;
-			case 0: System.out.println("이용해주셔서 감사합니다. 프로그램이 종료됩니다.");
+			case 0: System.out.println("\n이용해주셔서 감사합니다. 프로그램이 종료됩니다.");
 				return;
-			default: System.out.println("메뉴를 잘못입력하셨습니다. 다시 입력해주세요.");
+			default: System.out.println("\n메뉴를 잘못입력하셨습니다. 다시 입력해주세요.");
 				break;
 			} // switch
 		} // while
@@ -76,24 +76,30 @@ public class ProductMenu {
 		
 	}
 	
+	public String inputData(String menu) {
+		
+		System.out.print(menu);
+
+		return sc.nextLine();
+	}
+
 	public void updateProduct() {
-		
+
 		System.out.println("\n==== 상품 정보 수정 ====");
-		
-		System.out.print("수정할 상품 아이디 : ");
-		String productId = sc.nextLine();
-		
+
+		String productId = productId();
+
 		System.out.print("수정할 상품 이름 : ");
 		String pName = sc.nextLine();
-		
+
 		System.out.print("수정할 상품 가격 : ");
 		int price = sc.nextInt();
-		
+
 		sc.nextLine();
-		
+
 		System.out.print("수정할 상품 상세 정보 : ");
 		String description = sc.nextLine();
-		
+
 		System.out.print("수정할 상품 재고 : ");
 		int stock = sc.nextInt();
 		
@@ -101,11 +107,25 @@ public class ProductMenu {
 		
 	}
 	
+	public String productId() {
+		
+		System.out.print("\n상품 아이디를 입력하세요 : ");
+		
+		return sc.nextLine();
+	}
+	
+	public String productName() {
+		
+		System.out.print("\n상품 이름을 입력하세요 : ");
+		
+		return sc.nextLine();
+	}
+	
 	//------------------------------ 응답 화면 ------------------------------
 
 	public void displayNoDate(String message) {
 		
-		System.out.println("/n" + message);
+		System.out.println("\n" + message);
 	}
 	
 	public void displayProductList(ArrayList<Product> list) {

@@ -8,7 +8,7 @@ import com.kh.view.ProductMenu;
 
 public class ProductController {
 
-	public void selecList() {
+	public void selectList() {
 		
 		ArrayList<Product> list = new ProductService().selectList();
 		
@@ -26,9 +26,9 @@ public class ProductController {
 		int result = new ProductService().insertProduct(p);
 		
 		if (result > 0) {
-			new ProductMenu().displaySuccess("상품이 추가되었습니다.");
+			new ProductMenu().displaySuccess("\n상품이 추가되었습니다.");
 		} else {
-			new ProductMenu().displayFail("상품 추가를 실패했습니다.");
+			new ProductMenu().displayFail("\n상품 추가를 실패했습니다.");
 		}
 	}
 	
@@ -45,9 +45,31 @@ public class ProductController {
 		int result = new ProductService().updateProduct(p);
 		
 		if (result > 0) {
-			new ProductMenu().displaySuccess("상품 정보가 수정되었습니다.");
+			new ProductMenu().displaySuccess("\n상품 정보가 수정되었습니다.");
 		} else {
-			new ProductMenu().displayFail("상품 정보 수정에 실패했습니다.");
+			new ProductMenu().displayFail("\n상품 정보 수정에 실패했습니다.");
+		}
+	}
+	
+	public void deleteProduct(String productId) {
+		
+		int result = new ProductService().deleteProduct(productId);
+		
+		if (result > 0) {
+			new ProductMenu().displaySuccess("\n상품이 삭제되었습니다.");
+		} else {
+			new ProductMenu().displayFail("\n상품 삭제에 실패했습니다.");
+		}
+	}
+	
+	public void selectByName(String pName) {
+		
+		ArrayList<Product> list = new ProductService().selectByName(pName);
+		
+		if (list.isEmpty()) {
+			new ProductMenu().displayNoDate("\n해당하는 상품 결과가 없습니다.");
+		} else {
+			new ProductMenu().displayProductList(list);
 		}
 	}
 }

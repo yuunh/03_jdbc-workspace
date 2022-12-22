@@ -54,4 +54,30 @@ public class ProductService {
 		
 		return result;
 	}
+	
+	public int deleteProduct(String productId) {
+		
+		Connection conn = getConnection();
+		
+		int result = new ProductDao().deleteProduct(conn, productId);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
+	public ArrayList<Product> selectByName(String pName) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Product> list = new ProductDao().selectByName(conn, pName);
+		
+		close(conn);
+		
+		return list;
+	}
 }

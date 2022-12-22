@@ -29,4 +29,28 @@
 		  		, ?
 		  		)
 	</entry>
+	<entry key="updateProduct">
+		UPDATE PRODUCT
+		   SET
+			   P_NAME = ?
+			 , PRICE = ?
+			 , DESCRIPTION = ?
+			 , STOCK = ?
+		 WHERE PRODUCT_ID = ?
+	</entry>
+	<entry key="deleteProduct">
+		DELETE
+		  FROM PRODUCT
+		 WHERE PRODUCT_ID = ?
+	</entry>
+	<entry key="selectByName">
+		SELECT
+			  PRODUCT_ID
+			, P_NAME
+			, PRICE
+			, DESCRIPTION
+			, STOCK
+		 FROM PRODUCT
+		WHERE P_NAME LIKE ?
+	</entry>
 </properties>

@@ -12,6 +12,8 @@ import java.util.Properties;
 import static com.kh.common.JDBCTemplate.*;
 import com.kh.model.vo.Product;
 
+import oracle.net.aso.p;
+
 public class ProductDao {
 
 	private Properties prop = new Properties();
@@ -87,6 +89,90 @@ public class ProductDao {
 	}
 	
 	public int updateProduct(Connection conn, Product p) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateProduct");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, p.getP_Name());
+			pstmt.setInt(2, p.getPrice());
+			pstmt.setString(3, p.getDescription());
+			pstmt.setInt(4, p.getStock());
+			pstmt.setString(5, p.getProduct_Id());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int deleteProduct(Connection conn, String productId) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteProduct");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, productId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public ArrayList<Product> selectByName(Connection conn, String pName) {
+		
+		ArrayList<Product> list = new ArrayList<Product>();
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectByName");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, "%" + pName + "%");
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				list.add(new Product(rset.getString("product_id"),
+									 rset.getString("p_name"),
+									 rset.getInt("price"),
+									 rset.getString("description"),
+									 rset.getInt("stock")
+									 ));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 		
 	}
 }
