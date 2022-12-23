@@ -36,12 +36,6 @@ public class ProductController {
 		
 		Product p = new Product();
 		
-		p.setProduct_Id(productId);
-		p.setP_Name(pName);
-		p.setPrice(price);
-		p.setDescription(description);
-		p.setStock(stock);
-		
 		int result = new ProductService().updateProduct(p);
 		
 		if (result > 0) {
