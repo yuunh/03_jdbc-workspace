@@ -123,4 +123,29 @@ public class GameDao {
 		
 		return list;
 	}
+	
+	public int insertGame(Connection conn, Game g) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertGame");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, g.getpName());
+			pstmt.setInt(2, g.getPrice());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

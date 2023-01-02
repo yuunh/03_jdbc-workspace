@@ -31,4 +31,21 @@
 	 FROM GAME
 	WHERE PRICE BETWEEN ? AND ?
 </entry>
+<entry key="insertGame">
+	INSERT
+		INTO GAME
+			(
+			  PNO
+			, PNAME
+			, PRICE
+			, REG_DATE
+			)
+		VALUES
+			(
+			  SEQ_PNO.NEXTVAL
+			, ?
+			, ?
+			, SYSDATE
+			)
+</entry>
 </properties>

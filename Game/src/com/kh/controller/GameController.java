@@ -41,4 +41,30 @@ public class GameController {
 		}
 	}
 	
+	public void insertGame(String pName, int price) {
+		
+		Game g = new Game(pName, price);
+		
+		int result = new GameService().insertGame(g);
+		
+		if (result > 0) {
+			new GameMenu().displaySuccess("\n== 게임이 추가되었습니다. ==");
+		} else {
+			new GameMenu().displayFail("\n== 게임 추가에 실패했습니다. ==");
+		}
+	}
+	
+	public void updateGaem(String pName, int price) {
+		
+		Game g = new Game(pName, price);
+		
+		int result = new GameService().updateGame(g);
+		
+		if (result > 0) {
+			new GameMenu().displaySuccess("\n== 게임이 수정되었습니다. ==");
+		} else {
+			new GameMenu().displayFail("\n== 게임 수정에 실패했습니다. ==");
+		}
+		
+	}
 }

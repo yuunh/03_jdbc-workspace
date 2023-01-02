@@ -1,6 +1,7 @@
 package com.kh.view;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 import com.kh.controller.GameController;
@@ -42,10 +43,10 @@ public class GameMenu {
 				gc.searchPrice(lowestPrice(), highestPrice());
 				break;
 			case 4:
-
+				inputGame();
 				break;
 			case 5:
-
+				updateGame();
 				break;
 			case 6:
 
@@ -88,9 +89,37 @@ public class GameMenu {
 		//sc.nextLine();
 	}
 	
+	public void inputGame() {
+		
+		System.out.println("\n===== 게임 추가 =====");
+		
+		String pName = pName();
+		
+		System.out.print("게임 가격을 입력하세요 : ");
+		int price = sc.nextInt();
+		
+		sc.nextLine();
+				
+		gc.insertGame(pName, price);
+	}
+	
+	public void updateGame() {
+		
+		System.out.println("\n===== 게임 정보 수정 =====");
+		
+		String pName = pName();
+		
+		System.out.println("게임 가격을 입력하세요 : ");
+		int price = sc.nextInt();
+		
+		sc.nextLine();
+		
+		gc.updateGame(pName, price);
+	}
+	
 	public void displayNoDate(String message) {
 		
-		System.out.println("\n" + message);
+		System.out.println(message);
 		
 	}
 	
@@ -102,4 +131,15 @@ public class GameMenu {
 			System.out.println(g);
 		}
 	}
+	
+	public void displaySuccess(String message) {
+		
+		System.out.println(message);
+	}
+	
+	public void displayFail(String message) {
+		
+		System.out.println(message);
+	}
+
 }

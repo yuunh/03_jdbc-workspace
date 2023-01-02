@@ -39,4 +39,34 @@ public class GameService {
 		return list;
 	}
 	
+	public int insertGame(Game g) {
+		
+		int result = new GameDao().insertGame(conn, g);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	public int updateGame(Game g) {
+		
+		int result = new GameDao().updateGame(conn, g);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
 }

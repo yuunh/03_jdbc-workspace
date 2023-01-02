@@ -18,6 +18,12 @@ public class Game {
 		this.price = price;
 		this.regDate = regDate;
 	}
+	
+	public Game(String pName, int price) {
+		super();
+		this.pName = pName;
+		this.price = price;
+	}
 
 	public int getpNo() {
 		return pNo;
